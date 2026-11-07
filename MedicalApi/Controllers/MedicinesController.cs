@@ -35,6 +35,8 @@ public class MedicinesController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(typeof(Medicine), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<Medicine>> Create(Medicine medicine)
     {
         medicine.Id = 0;
@@ -77,6 +79,10 @@ public class MedicinesController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<ActionResult> Delete([FromRoute] int id)
     {
         if (id <= 0)

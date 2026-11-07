@@ -35,6 +35,8 @@ public class SpravkaTypesController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(typeof(SpravkaType), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<SpravkaType>> Create(SpravkaType type)
     {
         type.Id = 0;
@@ -76,6 +78,10 @@ public class SpravkaTypesController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<ActionResult> Delete([FromRoute] int id)
     {
         if (id <= 0)
